@@ -118,7 +118,7 @@ int first_run;
 int     zladag[2], tt, tm, ty, nyidor, tmth;
 int     zlasho1, zlasho2;
 int     ltt, ltm, lty;
-int     nyidru[], nyilon[], nyibar[], gzadru[], tsedru[], tsebar[];
+int     gzadru[], tsedru[], tsebar[];
 int     nyiwor[], nyidag[], rilcha[], gzadag[];
 int     sun_f_b, gza_f_b;
 int     nyidru_b[], nyilon_b[], nyibar_b[];
