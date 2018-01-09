@@ -59,8 +59,8 @@ void get_phrochen ( int *, int, int, int );
 int calc_byedpa ( int *, int * );
 void gen_phrod ( int, int, int );
 int get_tenbrel ( int, int );
-void get_bishti_str ( int ); 
-void chk_namgo ( int );     
+void get_bishti_str ( int );
+void chk_namgo ( int );
 
 // T4B.C
 
@@ -87,7 +87,7 @@ void add_g6 ( int *, int *, int *, int, int, int );
 void add_g7 ( int *, int *, int *, int, int, int,
               int );
 void mul_gen ( int *, int *, int, int, int );
-int exp_lst ( int *, int ); 
+int exp_lst ( int *, int );
 double conv2degs ( int *, int, int );
 double solar_long ( int, double );
 double conv2degs1 ( int *, int, int );
