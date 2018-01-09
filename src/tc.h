@@ -1,10 +1,8 @@
 // T1.C:
-
 void cal_cyc ( void );
 void new_yer ( void );
 
 // T2.C:
-
 void set_grub ( void );
 void set_epoch ( void );
 void do_rahu ( int, int );
@@ -22,7 +20,6 @@ void nyi_dag ( int * );
 void gza_dag ( int * );
 
 // T2A.C
-
 void set_byed ( void );
 void set_epoch_b ( void );
 void nyi_dru_b ( int );
@@ -30,7 +27,6 @@ void nyi_lon_b ( int );
 void nyi_dag_b ( int * );
 
 // T3.C - Planet routines.
-
 void calc_dalbar ( int *, int, int, int );
 void do_daldag ( int *, int *, int *, int *, int *, int );
 void do_plans ( int );
@@ -41,14 +37,12 @@ void merdag ( void ); // Mercury myur dag
 void vendag ( void ); // Venus myur dag
 
 // T4.C: Routines for printing calendars:
-
 void prn_cal ( void );
 void prn_plans ( void );
 void prn_rahu ( int );
 int chk_spec ( int, int );
 
 // T4A.C: Overflow from t4.c
-
 void set_lang ( void );
 void zatse_phro ( int *, int *, int, int, int, int );
 void chk_tsephro ( char *, int, int, int, int );
@@ -63,19 +57,16 @@ void get_bishti_str ( int );
 void chk_namgo ( int );
 
 // T4B.C
-
 int chk_sadag ( int, int );
 int chk_sadag2 ( int m, int t );
 
 // T5.C:
-
 void prn_cal2 ( int );
 void prn_plans2 ( void );
 void prn_rahu2 ( int );
 void lm2signs ( int *, int *, int *, int * );
 
 // UTILS.C:
-
 void prn_lst6 ( int * );
 void prn_lst7 ( int * );
 void prn_lstd ( int *, int, int );
@@ -113,7 +104,6 @@ void prin_str ( char * );
 void addstrings ( char *, char * );
 
 // TESTS.C:
-
 void set_errfl ( void );
 void wrt_errfl ( void );
 void clos_errfl ( void );
