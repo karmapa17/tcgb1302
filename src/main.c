@@ -15,4 +15,5 @@
 int main()
 {
     printf("hello world");
+    prn_cal();
 }
