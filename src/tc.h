@@ -108,3 +108,163 @@ void set_errfl ( void );
 void wrt_errfl ( void );
 void clos_errfl ( void );
 void srch_cyc ( void );
+
+// extern
+int d_bug;
+int full_print;
+int cal_print;
+int first_run;
+
+int     zladag[], tt, tm, ty, nyidor, tmth;
+int     zlasho1, zlasho2;
+int     ltt, ltm, lty;
+int     nyidru[], nyilon[], nyibar[], gzadru[], tsedru[], tsebar[];
+int     nyiwor[], nyidag[], rilcha[], gzadag[];
+int     sun_f_b, gza_f_b;
+int     nyidru_b[], nyilon_b[], nyibar_b[];
+int     nyiwor_b[], nyidag_b[];
+int     nyibarl, tsebarl;
+int     nxt_nyidag[], nxt_gzadag[];
+int     prv_nyidag[], prv_gzadag[];
+int     prv_sbyorlong[6], fst_sbyorlong[6], sbyorlong[6];
+int     spz_frac_b, spz_frac_c;
+int     nyi_cnt; // Count of days for solar longitude calculation;
+int     rahutsa[6], rahudong[6], rahudong30[6], rahujug[6];
+int     rahupart; // 230 fraction for Rahu cycle
+double rahurealf;
+int     zerlst[6];
+int     cur_mth;   /*** Current month number, full form ***/
+int     cur_tsh;   /*** Current Tithi ***/
+int     ch_lh[6];
+int     lst_dy, cur_dy;
+int  zeromthfg;  // Flag for zero fractional part in month;
+int scndzero;  // New flag for zero fractional part of month.
+int     spizag, spizag15, spizag30;
+int   juldat;  /** Julian day number **/
+int   wd, wm, wy;  /** Western dates **/
+int   doweek;      // Day of the week
+int   epch_yr, eyr_a, ril_a, ril_b;
+int  epch;
+int  gza_short_flg;
+int  gza_f;
+int  sun_f;
+
+int    lista[], listb[], listc[];
+int    monlong[];
+int    prv_monlong[];
+int    list1[], list2[], list3[];
+int    adj_mth;
+
+int phrodx, phrodx2;
+int yan_kwong_flg, zin_phung_flg;
+int klu_bzlog_flg, klu_thebs_flg, nyi_nag_flg;
+
+// Planet figures
+int meradd;  // Figures to be added for planets for the
+int venadd;  // nyin zhag dal ba. These are days of cycle.
+int maradd;
+int jupadd;
+int satadd;
+int dragkadd;  // This is added for drag po'iu rkang 'dzin.
+int dragkres;  // Result for day in question -- NEW 3/12/2009
+int mar_gz, jup_gz, sat_gz, mer_gz, ven_gz; // Particular days.
+
+int merkanbar[];
+int merkandag[];
+
+int venkanbar[];
+int venkandag[];
+
+int mardalbar[];
+int jupdalbar[];
+int satdalbar[];
+
+int merdaldag[];
+int mermurdag[];
+int vendaldag[];
+int venmurdag[];
+int mardaldag[];
+int marmurdag[];
+int jupdaldag[];
+int jupmurdag[];
+int satdaldag[];
+int satmurdag[];
+
+// Indices for planetary direction:
+int mer_d;
+int ven_d;
+int mar_d;
+int jup_d;
+int sat_d;
+
+int ZS_s, ZS_d, ZS_m;  // Zodiac signs, minutes, seconds;
+
+char filenam[];
+FILE *fptgt, *fptgt1, *fptgt2;
+char outbuf[];
+int print_on, printinprog;
+char printstring[];
+
+int zhallo[7];
+int byedlo[6];
+int byedskar[4];
+int byedkyon[5];
+
+int cycadd01;
+
+// Floating point data - Tibetan equivalents:
+double suntl;
+double montl;
+double mertl;
+double ventl;
+double martl;
+double juptl;
+double sattl;
+double rahtl;
+
+// String variables:
+char *e_str[];
+
+char *dayoweek[7];
+char *dayoweekT[7];
+char *lunmanP[27];
+char *lunmanT[27];
+char *lunmont[12];
+char *lunmanS[27];
+int lunmanelem[27];
+char *fourelem[4];
+char *fourelemT[4];
+int dowkelem[7];
+char *dgaT[5];
+char *yogaP[];
+char *yogaT[];
+char *yogaS[];
+char *byedP[];
+char *byedT[];
+char *byedS[];
+char *cycanim[];
+char *cycanimT[];
+char *cycelem[];
+char *cycelem1[];
+char *cycelemT[];
+char *cycelem1T[];
+char *cycgendE[2];
+char *cycgendT[2];
+char *cycpar[];
+char *cycparT[];
+char *cycparE[];
+char *cycstems[];
+char *cycbranch[];
+char *Clunman[];
+char *ClunmanK[];
+char *wmonths[];
+char *byungphrod[];
+char *phrodchen[];
+char *tenbrelT[];
+char *plandirT[];
+char *plandirE[];
+char bishti_str[];
+char namgo_str[];
+int sadag_str_len;
+char sadag_str[];
+char sadag_str2[];
