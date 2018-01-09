@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
-#include <conio.h>
 #include "tc.h"
 #include "tc.ext"
 #include "bcd.h"
@@ -198,7 +197,6 @@ int chk_spec ( int m, int t )
         break;
       }
 //    printf ( "chk_spc, returning zero...\n" );
-//    getch ();        
     return (0);
   } // END - chk_spec ()
 
