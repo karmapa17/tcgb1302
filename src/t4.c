@@ -18,7 +18,7 @@ int nxt_monlong[6];
 int fst_monlong[6], cur_monlong[6], scd_monlong[6], tt_monlong[6];
 
 void prn_cal ( void )
-  {
+{
     int i, more, n, newmth, lhag, chad, nextchad, nextlhag;
     int intercal, delaymth, dgax;
     int yr_gender;    // 1 = female, odd; 0 = male, even
@@ -723,10 +723,10 @@ donextyear:
         ++cur_year;
         goto donextyear;
       }
-  } // END - prn_cal ()
+}
 
 void prn_plans ( void )
-  {
+{
     lm2signs ( &ZS_s, &ZS_d, &ZS_m, marmurdag );
     sprintf ( outbuf, "\nMars, slow: %d;%d,%d,%d,%d - fast: %d;%d,%d,%d,%d %s %d;%d,%d\n",
     mardaldag[0], mardaldag[1], mardaldag[2], mardaldag[3], mardaldag[4],
@@ -752,10 +752,10 @@ void prn_plans ( void )
     venkanbar[0], venkanbar[1], venkanbar[2], venkanbar[3], venkanbar[4],
     venmurdag[0], venmurdag[1], venmurdag[2], venmurdag[3], venmurdag[4], plandirE[ven_d], ZS_s, ZS_d, ZS_m );
     fprintf ( fptgt1, "%s", outbuf );
- } // END - prn_plans
+}
 
 void prn_rahu ( int tt )
-  {
+{
     if ( tt == 15 )
       {
         sprintf ( outbuf, "Rahu, head: %d;%d,%d,%d,%d",
@@ -770,4 +770,4 @@ void prn_rahu ( int tt )
         if ( cal_print ) // Flag to indicate calendar printing.
           fprintf ( fptgt1, "%s\n\n", outbuf );
       }
-  } // END - prn_rahu ()
+}

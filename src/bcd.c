@@ -27,12 +27,12 @@ void chk_bcd ( void );
 // Routine to print to screen maximum number of significant figures used
 // in a BCD integer. Highest value encountered so far is 12
 void chk_bcd ( void )
-  {
+{
     printf ( "Highest figures used: %d\n", BCDMAX - bcd_top );
-  }
+}
 
 void l2bcd ( signed char * b, int n )
-  {
+{
     int i;
     int x;
     x = n;
@@ -60,10 +60,10 @@ void l2bcd ( signed char * b, int n )
             printf ( "OVERFLOW IN L2BCD\n" );
           }
       } while ( x );
-  } // END - l2bcd ()
+}
 
 int bcd2l ( signed char * b )
-  {
+{
     int i;
     int x;
     x = 0L;
@@ -74,10 +74,10 @@ int bcd2l ( signed char * b )
     if ( *b < 0 )
       x = -x;
     return ( x );
-  } // END - int bcd2l ()
+}
 
 void addbcd ( signed char * a1, signed char * b1, signed char * b2 )
-  {
+{
     int i;
     int x;
     signed char bx1[BCDMAX];
@@ -140,12 +140,11 @@ void addbcd ( signed char * a1, signed char * b1, signed char * b2 )
         *a1 = 1;
       }
     return;
-  } // END - addbcd ()
+}
 
 // Compare absolute values
-
 int compabsbcd ( signed char * x1, signed char * x2 ) // +1 if x1 > x2
-  {                                                   // -1 if x1 < x2
+{                                                   // -1 if x1 < x2
     int x;                                            // 0  if x1 = x2
     int ind1, ind2;
     ind1 = 1;
@@ -163,11 +162,11 @@ int compabsbcd ( signed char * x1, signed char * x2 ) // +1 if x1 > x2
         ++ind2;
       } while ( ind2 < BCDMAX );
     return (x);
-  } // END - compabsbcd ()
+}
 
 void subbcd ( signed char * a1, signed char * b1, signed char * b2 )
      // a1 = b1 - b2
-  {
+{
     int i;
     int x, c;
     signed char bx1[BCDMAX];
@@ -244,10 +243,10 @@ void subbcd ( signed char * a1, signed char * b1, signed char * b2 )
               *( a1 + i ) = '\0';
           }
       }
-  } // END - subbcd ()
+}
 
 void mulbcdl ( signed char * a1, signed char * b1, int n ) // a1 = b1 * n
-  {
+{
     int i, r, c, j, sgn;
     int x;
 
@@ -305,10 +304,10 @@ void mulbcdl ( signed char * a1, signed char * b1, int n ) // a1 = b1 * n
     if ( i < bcd_top )
       bcd_top = i;
 
-  } // END - mulbcdl ()
+}
 
 void divbcdl ( signed char * a1, signed char * b1, int n ) // a1 = b1 / n
-  {
+{
     int  i, j, sgn, numdigs, strtdig;
     int x, y, res, rem;
 
@@ -395,14 +394,14 @@ void divbcdl ( signed char * a1, signed char * b1, int n ) // a1 = b1 / n
         ++strtdig;
       } while ( strtdig < BCDMAX );
     *a1 = sgn; // THIS GETS THE SIGN RIGHT
-  } // END - divbcdl ()
+}
 
 void modbcdl ( signed char * a1, signed char * b1, int x )
-  {
+{
     signed char dx1[BCDMAX];
     signed char dx2[BCDMAX];
 
     divbcdl ( dx1, b1, x );
     mulbcdl ( dx2, dx1, x );
     subbcd ( a1, b1, dx2 );
-  } // END - modbcdl ()
+}

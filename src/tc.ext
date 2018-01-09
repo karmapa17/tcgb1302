@@ -48,7 +48,6 @@ extern int yan_kwong_flg, zin_phung_flg;
 extern int klu_bzlog_flg, klu_thebs_flg, nyi_nag_flg;
 
 // Planet figures
-
 extern int meradd;  // Figures to be added for planets for the
 extern int venadd;  // nyin zhag dal ba. These are days of cycle.
 extern int maradd;
@@ -80,7 +79,6 @@ extern int satdaldag[];
 extern int satmurdag[];
 
 // Indices for planetary direction:
-
 extern int mer_d;
 extern int ven_d;
 extern int mar_d;
@@ -103,7 +101,6 @@ extern int byedkyon[5];
 extern int cycadd01;
 
 // Floating point data - Tibetan equivalents:
-
 extern double suntl;
 extern double montl;
 extern double mertl;
@@ -114,7 +111,6 @@ extern double sattl;
 extern double rahtl;
 
 // String variables:
-
 extern char *e_str[];
 
 extern char *dayoweek[7];
