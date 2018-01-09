@@ -10,16 +10,6 @@ signed char bcdb[BCDMAX];
 signed char bcdc[BCDMAX];
 signed char bcdd[BCDMAX];
 
-// These are for intermediate calculations only:
-signed char bcdx0[BCDMAX];
-signed char bcdx1[BCDMAX];
-signed char bcdx2[BCDMAX];
-signed char bcdx3[BCDMAX];
-signed char bcdx4[BCDMAX];
-signed char bcdx5[BCDMAX];
-signed char bcdx6[BCDMAX];
-signed char bcary[BCDMAX];
-
 int bcd_top = BCDMAX; // Highest place used
 
 void chk_bcd ( void );
