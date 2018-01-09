@@ -23,14 +23,6 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE S
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ************************************************************************************/
 
-#include <stdio.h>
-#include <ctype.h>
-#include <math.h>
-#include "tc.h"
-#include "tc.ext"
-#include "bcd.h"
-#include "bcd.ext"
-
 // Local to this file only:
 
 int  spz_c, spz_b, spz_f, spz_j;

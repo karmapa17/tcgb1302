@@ -122,7 +122,7 @@ int printinprog = 0;
 char printstring[120];
 
 int zhallo[7];
-int byedlo[5];
+//int byedlo[5];
 int byedskar[4];
 int byedkyon[5];
 

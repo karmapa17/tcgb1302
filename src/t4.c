@@ -1,11 +1,4 @@
 // t4.c - all routines and data for printing to disk a full calendar
-#include <stdio.h>
-#include <ctype.h>
-#include <string.h>
-#include "tc.h"
-#include "bcd.h"
-#include "bcd.c"
-#include "utils.c"
 
 char gen_phrod_str[30];
 char sreg_str[30];

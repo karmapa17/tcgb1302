@@ -1,11 +1,4 @@
 // t4a.c - routines for calendar symbolic information
-#include <stdio.h>
-#include <ctype.h>
-#include <string.h>
-#include "tc.h"
-#include "tc.ext"
-#include "bcd.h"
-#include "bcd.ext"
 
 extern int yan_kwong_flg;
 extern int zin_phung_flg;
