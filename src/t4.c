@@ -3,9 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "tc.h"
-#include "tc.ext"
 #include "bcd.h"
-#include "bcd.ext"
 
 char gen_phrod_str[30];
 char sreg_str[30];
