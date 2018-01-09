@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "tc.def"
 #include "tc.h"
 #include "t2.c"
 #include "t2a.c"
