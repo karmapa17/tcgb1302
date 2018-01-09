@@ -1,8 +1,7 @@
 #include <stdio.h>
-#include "bcd.c"
+#include "t4.c"
 
 int main()
 {
     printf("hello world");
-    chk_bcd();
 }
