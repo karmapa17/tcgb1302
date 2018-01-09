@@ -27,7 +27,6 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <stdio.h>
 #include <ctype.h>
 #include <math.h>
-#include <conio.h>
 #include "bcd.h"
 
 signed char bcda[BCDMAX];
@@ -83,7 +82,6 @@ void l2bcd ( signed char * b, int n )
         if ( i < 1 )
           {
             printf ( "OVERFLOW IN L2BCD\n" );
-            getch ();
           }
       } while ( x );
   } // END - l2bcd ()
@@ -386,7 +384,6 @@ void divbcdl ( signed char * a1, signed char * b1, int n ) // a1 = b1 / n
     if ( strtdig > BCDMAX - 1 )
       {
         printf ( "STRTDIG OVERFLOW\n");
-        getch ();
       }
 
     do
