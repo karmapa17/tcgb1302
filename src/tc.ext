@@ -81,8 +81,8 @@ extern int satmurdag[];
 
 // Indices for planetary direction:
 
-extern int mer_d;  
-extern int ven_d;  
+extern int mer_d;
+extern int ven_d;
 extern int mar_d;
 extern int jup_d;
 extern int sat_d;
@@ -90,7 +90,7 @@ extern int sat_d;
 extern int ZS_s, ZS_d, ZS_m;  // Zodiac signs, minutes, seconds;
 
 extern char filenam[];
-extern FILE *fptgt, *fptgt1, *fptgt2;    
+extern FILE *fptgt, *fptgt1, *fptgt2;
 extern char outbuf[];
 extern int print_on, printinprog;
 extern char printstring[];
@@ -121,7 +121,7 @@ extern char *dayoweek[7];
 extern char *dayoweekT[7];
 extern char *lunmanP[27];
 extern char *lunmanT[27];
-extern char *lunmont[12]; 
+extern char *lunmont[12];
 extern char *lunmanS[27];
 extern int lunmanelem[27];
 extern char *fourelem[4];
