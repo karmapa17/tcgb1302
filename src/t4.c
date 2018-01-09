@@ -4,6 +4,8 @@
 #include <string.h>
 #include "tc.h"
 #include "bcd.h"
+#include "bcd.c"
+#include "utils.c"
 
 char gen_phrod_str[30];
 char sreg_str[30];
