@@ -22,7 +22,7 @@ extern char solar_term_str[];
 // Routine to check for special days, festivals, anniversaries, etc.
 // Many are currently commented out. Uncomment if needed.
 int chk_spec ( int m, int t )
-  {
+{
     switch ( m )
       {
         case 1:
@@ -198,10 +198,10 @@ int chk_spec ( int m, int t )
       }
 //    printf ( "chk_spc, returning zero...\n" );
     return (0);
-  } // END - chk_spec ()
+}
 
 void set_lang ( void )
-  {
+{
     int i;
 /**************
     for ( i = 0; i < 8; ++i )
@@ -222,11 +222,11 @@ void set_lang ( void )
     for ( i = 0; i < 11; ++i )
       byedP[i] = byedT[i];
 /**************/
- } // END - set_lang
+}
 
 int chk_solar_term ( int *gza, int *nyib, char *t_str ) // NOT CURRENTLY USED
 //         chk_solar_term ( gzadag, nyibar, solar_term_str );
-  {
+{
     int sundb1, sundb2; // Mean sun at daybreak, begin and end
     int sunmid;
     int x; //, y;
@@ -320,10 +320,10 @@ int chk_solar_term ( int *gza, int *nyib, char *t_str ) // NOT CURRENTLY USED
                   s2t1, s2t2, s2t3, x, s2long1, s2long2, s2long3 );
       }
     return (1); // solar term found
-  } // chk_solar_term
+}
 
 void mak_lmchange_string ( int *f_ml, int *s_ml, int dow )
-  {
+{
     int i;
     int fst_ml[6], scd_ml[6];
     int lm1, lm2, lmx;
@@ -364,10 +364,10 @@ void mak_lmchange_string ( int *f_ml, int *s_ml, int dow )
 
     sprintf ( lmchg, "%s gi %d nas %s. %s-%s, %s", cycanimT[chga], chgb, lunmanT[nxtlm], // nxtlm,
                fourelemT[ dowkelem[ dow ]], fourelemT[ lunmanelem[ lmx ]], phrodchen[phrodx2] );
-  } // END - mak_lmchange_string
+}
 
 int calc_byedpa ( int * mlong, int * ndag )
-  {
+{
     int byedpa, x;
     clear_a_b ();
     sub_gen ( lista, mlong, ndag, 27L, sun_f ); // AT SUNRISE FOR MOON ONLY
@@ -384,10 +384,10 @@ int calc_byedpa ( int * mlong, int * ndag )
     else
       x = ( byedpa - 1 ) % 7;
     return ( x );
-  } // END - calc_byedpa
+}
 
 void byung_phro ( char *b_str, int doweek, int lm, int monlong1 )
-  { // Could do with another source for these
+{ // Could do with another source for these
     *b_str = '\0';
     switch ( doweek ) // This is unfinished, and wrong - there are only ten!!! ???
       {
@@ -478,11 +478,11 @@ void byung_phro ( char *b_str, int doweek, int lm, int monlong1 )
           if ( lm == 3L ) strcat ( b_str, byungphrod[10] );
           break;
       }
-  } // END - byung_phro
+}
 
 // VKP, 1,148
 void get_phrochen ( int *px, int doweek, int lunmanx, int monlong1 )
-  {
+{
     int x;
     x = lunmanx;
     if ( x > 21 )
@@ -500,10 +500,10 @@ void get_phrochen ( int *px, int doweek, int lunmanx, int monlong1 )
     *px = x - *px;
     if ( *px < 0 )
       *px = *px + 28;
-  } // END - get_phrochen
+}
 
 void zatse_phro ( int *zapro, int *tsepro, int gza, int tshe, int lm , int monlong1 ) // This is for the five gzaphrod[]
-  { // Not finished - still needs work
+{ // Not finished - still needs work
     *zapro = 0; *tsepro = 0;
     switch ( gza )
       {
@@ -556,10 +556,10 @@ void zatse_phro ( int *zapro, int *tsepro, int gza, int tshe, int lm , int monlo
             *tsepro = 1L;
           break;
       }
-  } // END - zatse_phro
+}
 
 void chk_tsephro ( char *str, int phro1, int phro2, int gza1, int gza2 )
-  { // sreg_str, tsephro1, tsephro2, gzadag[1], gzadag[2]
+{ // sreg_str, tsephro1, tsephro2, gzadag[1], gzadag[2]
     int ts_chga, ts_chgb;
     *str = '\0';
     if ( phro1 == 0L && phro2 == 0L )
@@ -587,10 +587,10 @@ void chk_tsephro ( char *str, int phro1, int phro2, int gza1, int gza2 )
       {
         sprintf ( sreg_str, "sreg tshes" );
       }
-  } // END - chk_tsephro
+}
 
 void gen_phrod ( int lm, int dow, int frac )
-  {
+{
     gen_phrod_str[0] = 0;
     if ( dow == 0 )
       {
@@ -701,10 +701,10 @@ void gen_phrod ( int lm, int dow, int frac )
             case 2: strcpy ( gen_phrod_str, "bkris nyi" ); break;
           }
       }
-  } // END - gen_phrod ()
+}
 
 int get_tenbrel ( int m, int t )
-  {
+{
     int sx, td;
     sx = m - 12;
     if ( sx < 0 )
@@ -728,10 +728,10 @@ int get_tenbrel ( int m, int t )
     while ( td > 11 )
       td = td - 12;
     return ( td );
-  } // END - get_tenbrel
+}
 
 void get_bishti_str ( int tt )
-  {
+{
     bishti_str[0] = 0;
     if ( tt == 4 )
       strcpy ( bishti_str, "bishti E." );
@@ -749,10 +749,10 @@ void get_bishti_str ( int tt )
       strcpy ( bishti_str, "bishti NW." );
     else if ( tt == 29 )
       strcpy ( bishti_str, "bishti NE." );
-  } // END - get_bishti_str ()
+}
 
 void chk_namgo ( int tt ) // n
-  {
+{
     namgo_str[0] = 0;
     if ( tt == 1 || tt == 11 || tt == 21 )
       strcpy ( namgo_str, "mgron" );
@@ -774,5 +774,4 @@ void chk_namgo ( int tt ) // n
       strcpy ( namgo_str, "shid" );
     else if ( tt == 10 || tt == 20 || tt == 30 )
       strcpy ( namgo_str, "spyi" );
-  } // END - chk_namgo ()
-
+}
