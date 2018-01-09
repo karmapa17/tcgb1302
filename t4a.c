@@ -329,7 +329,7 @@ void mak_lmchange_string ( int *f_ml, int *s_ml, int dow )
     int lm1, lm2, lmx;
     int chga, chgb, nxtlm;
 
-    if ( f_ml[0] == s_ml[0] )     
+    if ( f_ml[0] == s_ml[0] )
       {
         lmchg[0] = '\0';
         return;
@@ -340,11 +340,11 @@ void mak_lmchange_string ( int *f_ml, int *s_ml, int dow )
         fst_ml[i] = f_ml[i];
         scd_ml[i] = s_ml[i];
       }
-      
-    nxtlm = scd_ml[0];      
+
+    nxtlm = scd_ml[0];
     if ( scd_ml[0] == 0L )
       scd_ml[0] = 27L;
-      
+
     scd_ml[0] = scd_ml[0] - fst_ml[0];
     fst_ml[0] = 0L;
 
@@ -353,26 +353,26 @@ void mak_lmchange_string ( int *f_ml, int *s_ml, int dow )
     lm1 = ( fst_ml[1] * 60L + fst_ml[2] ) * 6L + fst_ml[3];
     lm2 = ( ( scd_ml[0] * 60L + scd_ml[1] ) * 60L + scd_ml[2] ) * 6L + scd_ml[3];
     lmx = s_ml[0];
-     
-// Time to lunar mansion change:     
-     
+
+// Time to lunar mansion change:
+
     chgb = ( 60L * ( 60L * 60L * 6L - lm1 ) ) / ( lm2 - lm1 );
     chga = chgb / 5L;
     chgb = chgb - chga * 5L + 1L;
-    
+
     get_phrochen ( &phrodx2, dow, lmx, 0L );
-    
-    sprintf ( lmchg, "%s gi %d nas %s. %s-%s, %s", cycanimT[chga], chgb, lunmanT[nxtlm], // nxtlm, 
+
+    sprintf ( lmchg, "%s gi %d nas %s. %s-%s, %s", cycanimT[chga], chgb, lunmanT[nxtlm], // nxtlm,
                fourelemT[ dowkelem[ dow ]], fourelemT[ lunmanelem[ lmx ]], phrodchen[phrodx2] );
   } // END - mak_lmchange_string
-  
+
 int calc_byedpa ( int * mlong, int * ndag )
   {
     int byedpa, x;
     clear_a_b ();
     sub_gen ( lista, mlong, ndag, 27L, sun_f ); // AT SUNRISE FOR MOON ONLY
     byedpa = lista[0] * 60 + lista[1];
-    byedpa = byedpa / 27;     
+    byedpa = byedpa / 27;
     if ( byedpa == 0L )
       x = 7;
     else if ( byedpa == 57 )
@@ -383,9 +383,9 @@ int calc_byedpa ( int * mlong, int * ndag )
       x = 10;
     else
       x = ( byedpa - 1 ) % 7;
-    return ( x );      
+    return ( x );
   } // END - calc_byedpa
-  
+
 void byung_phro ( char *b_str, int doweek, int lm, int monlong1 )
   { // Could do with another source for these
     *b_str = '\0';
@@ -479,26 +479,26 @@ void byung_phro ( char *b_str, int doweek, int lm, int monlong1 )
           break;
       }
   } // END - byung_phro
- 
+
 // VKP, 1,148
-void get_phrochen ( int *px, int doweek, int lunmanx, int monlong1 ) 
+void get_phrochen ( int *px, int doweek, int lunmanx, int monlong1 )
   {
     int x;
     x = lunmanx;
     if ( x > 21 )
-      ++x;                  
+      ++x;
     else if ( x == 21 )
       {
         if ( monlong1 >= 30L )
           x = 22;
       }
     else if ( x > 21 )
-      ++x;  
+      ++x;
     *px = 4 * ( doweek - 1 );
     if ( doweek == 0 )
     *px = 24;
     *px = x - *px;
-    if ( *px < 0 )  
+    if ( *px < 0 )
       *px = *px + 28;
   } // END - get_phrochen
 
@@ -561,7 +561,7 @@ void zatse_phro ( int *zapro, int *tsepro, int gza, int tshe, int lm , int monlo
 void chk_tsephro ( char *str, int phro1, int phro2, int gza1, int gza2 )
   { // sreg_str, tsephro1, tsephro2, gzadag[1], gzadag[2]
     int ts_chga, ts_chgb;
-    *str = '\0';    
+    *str = '\0';
     if ( phro1 == 0L && phro2 == 0L )
       return;
 
@@ -588,7 +588,7 @@ void chk_tsephro ( char *str, int phro1, int phro2, int gza1, int gza2 )
         sprintf ( sreg_str, "sreg tshes" );
       }
   } // END - chk_tsephro
-  
+
 void gen_phrod ( int lm, int dow, int frac )
   {
     gen_phrod_str[0] = 0;
@@ -597,30 +597,30 @@ void gen_phrod ( int lm, int dow, int frac )
         switch ( lm )
           {
             case 3: strcpy ( gen_phrod_str, "'grub sbyor" ); break;
-            case 12: strcpy ( gen_phrod_str, "'chi sbyor" ); break;            
+            case 12: strcpy ( gen_phrod_str, "'chi sbyor" ); break;
             case 19: strcpy ( gen_phrod_str, "sreg sbyor zung sbyor" ); break;
             case 22: strcpy ( gen_phrod_str, "bdud nyi" ); break;
             case 14: strcpy ( gen_phrod_str, "bdud rgyal bkris nyi" ); break;
             case 1: strcpy ( gen_phrod_str, "'jig nyi" ); break;
-            case 26: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;            
+            case 26: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;
             case 10: strcpy ( gen_phrod_str, "mi 'phrod nyi" ); break;
-            case 23: strcpy ( gen_phrod_str, "bdud nyi 'phel nyi" ); break;              
+            case 23: strcpy ( gen_phrod_str, "bdud nyi 'phel nyi" ); break;
           }
-      }          
+      }
     else if ( dow == 1 )
       {
         switch ( lm )
           {
             case 12: strcpy ( gen_phrod_str, "'grub sbyor" ); break;
-            case 16: strcpy ( gen_phrod_str, "'chi sbyor" ); break;            
+            case 16: strcpy ( gen_phrod_str, "'chi sbyor" ); break;
             case 9: strcpy ( gen_phrod_str, "sreg sbyor zung sbyor" ); break;
             case 2: strcpy ( gen_phrod_str, "bdud nyi" ); break;
             case 18: strcpy ( gen_phrod_str, "bdud rgyal" ); break;
             case 15: strcpy ( gen_phrod_str, "'jig nyi" ); break;
-            case 23: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;                        
+            case 23: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;
             case 17: case 22: strcpy ( gen_phrod_str, "mi 'phrod nyi" ); break;
             case 25: strcpy ( gen_phrod_str, "bkris nyi" ); break;
-            case 3: strcpy ( gen_phrod_str, "'phel nyi" ); break;              
+            case 3: strcpy ( gen_phrod_str, "'phel nyi" ); break;
           }
       }
     else if ( dow == 2 )
@@ -628,32 +628,32 @@ void gen_phrod ( int lm, int dow, int frac )
         switch ( lm )
           {
 
-            case 20: strcpy ( gen_phrod_str, "'chi sbyor" ); break;            
+            case 20: strcpy ( gen_phrod_str, "'chi sbyor" ); break;
             case 15: strcpy ( gen_phrod_str, "sreg sbyor mi 'phrod nyi" ); break;
             case 11: strcpy ( gen_phrod_str, "bdud nyi" ); break;
-            case 21: if ( frac >= 30L ) strcpy ( gen_phrod_str, "'grub sbyor bdud rgyal" ); 
+            case 21: if ( frac >= 30L ) strcpy ( gen_phrod_str, "'grub sbyor bdud rgyal" );
                      else strcpy ( gen_phrod_str, "'grub sbyor" ); break;
             case 17: strcpy ( gen_phrod_str, "'jig nyi" ); break;
-            case 25: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;                                    
+            case 25: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;
             case 10: strcpy ( gen_phrod_str, "zung sbyor" ); break;
             case 8: strcpy ( gen_phrod_str, "bkris nyi" ); break;
-            case 14: strcpy ( gen_phrod_str, "'phel nyi" ); break;              
+            case 14: strcpy ( gen_phrod_str, "'phel nyi" ); break;
           }
-      }                      
+      }
     else if ( dow == 3 )
       {
         switch ( lm )
           {
             case 0: strcpy ( gen_phrod_str, "'grub sbyor" ); break;
-            case 23: strcpy ( gen_phrod_str, "'chi sbyor" ); break;            
+            case 23: strcpy ( gen_phrod_str, "'chi sbyor" ); break;
             case 5: strcpy ( gen_phrod_str, "sreg sbyor zung sbyor" ); break;
             case 8: strcpy ( gen_phrod_str, "bdud nyi" ); break;
             case 25: strcpy ( gen_phrod_str, "bdud rgyal" ); break;
             case 26: strcpy ( gen_phrod_str, "'jig nyi" ); break;
-            case 24: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;                                                
+            case 24: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;
             case 16: strcpy ( gen_phrod_str, "mi 'phrod nyi" ); break;
             case 10: strcpy ( gen_phrod_str, "bkris nyi" ); break;
-            case 7: strcpy ( gen_phrod_str, "'phel nyi" ); break;              
+            case 7: strcpy ( gen_phrod_str, "'phel nyi" ); break;
           }
       }
     else if ( dow == 4 )
@@ -661,29 +661,29 @@ void gen_phrod ( int lm, int dow, int frac )
         switch ( lm )
           {
             case 16: strcpy ( gen_phrod_str, "'grub sbyor 'phel nyi" ); break;
-            case 0: strcpy ( gen_phrod_str, "'chi sbyor" ); break;            
+            case 0: strcpy ( gen_phrod_str, "'chi sbyor" ); break;
             case 18: strcpy ( gen_phrod_str, "sreg sbyor zung sbyor" ); break;
             case 19: strcpy ( gen_phrod_str, "bdud nyi" ); break;
             case 2: strcpy ( gen_phrod_str, "bdud rgyal" ); break;
             case 12: strcpy ( gen_phrod_str, "'jig nyi" ); break;
-            case 1: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;            
+            case 1: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;
             case 17: strcpy ( gen_phrod_str, "mi 'phrod nyi bkris nyi" ); break;
           }
-      }                            
+      }
     else if ( dow == 5 )
       {
         switch ( lm )
           {
             case 7: strcpy ( gen_phrod_str, "'grub sbyor" ); break;
-            case 4: strcpy ( gen_phrod_str, "'chi sbyor bdud nyi" ); break;            
+            case 4: strcpy ( gen_phrod_str, "'chi sbyor bdud nyi" ); break;
             case 22: strcpy ( gen_phrod_str, "sreg sbyor" ); break;
             case 6: strcpy ( gen_phrod_str, "bdud rgyal" ); break;
             case 3: strcpy ( gen_phrod_str, "'jig nyi" ); break;
-            case 16: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;                                                
+            case 16: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;
             case 21: if (frac<30L) strcpy ( gen_phrod_str, "mi 'phrod nyi" ); break;
             case 10: strcpy ( gen_phrod_str, "zung sbyor" ); break;
             case 11: strcpy ( gen_phrod_str, "bkris nyi" ); break;
-            case 25: strcpy ( gen_phrod_str, "'phel nyi" ); break;              
+            case 25: strcpy ( gen_phrod_str, "'phel nyi" ); break;
           }
       }
     else if ( dow == 6 )
@@ -691,18 +691,18 @@ void gen_phrod ( int lm, int dow, int frac )
         switch ( lm )
           {
             case 26: strcpy ( gen_phrod_str, "'grub sbyor" ); break;
-            case 8: strcpy ( gen_phrod_str, "'chi sbyor" ); break;            
+            case 8: strcpy ( gen_phrod_str, "'chi sbyor" ); break;
             case 3: strcpy ( gen_phrod_str, "sreg sbyor mi 'phrod nyi" ); break;
             case 7: strcpy ( gen_phrod_str, "bdud nyi" ); break;
             case 10: strcpy ( gen_phrod_str, "bdud rgyal" ); break;
             case 6: strcpy ( gen_phrod_str, "'jig nyi" ); break;
-            case 9: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;                                                
+            case 9: strcpy ( gen_phrod_str, "mi mthun nyi" ); break;
             case 4: strcpy ( gen_phrod_str, "zung sbyor 'phel nyi" ); break;
             case 2: strcpy ( gen_phrod_str, "bkris nyi" ); break;
           }
-      }                            
+      }
   } // END - gen_phrod ()
-  
+
 int get_tenbrel ( int m, int t )
   {
     int sx, td;
@@ -722,57 +722,57 @@ int get_tenbrel ( int m, int t )
           td = sx - ( t - 16 );
         else
           td = sx - ( t - 2 );
-      }  
+      }
     while ( td < 0 )
       td = td + 12;
     while ( td > 11 )
-      td = td - 12; 
-    return ( td );      
+      td = td - 12;
+    return ( td );
   } // END - get_tenbrel
-  
+
 void get_bishti_str ( int tt )
   {
     bishti_str[0] = 0;
     if ( tt == 4 )
       strcpy ( bishti_str, "bishti E." );
     else if ( tt == 8 )
-      strcpy ( bishti_str, "bishti S." );      
+      strcpy ( bishti_str, "bishti S." );
     else if ( tt == 11 )
-      strcpy ( bishti_str, "bishti W." );      
+      strcpy ( bishti_str, "bishti W." );
     else if ( tt == 15 )
-      strcpy ( bishti_str, "bishti N." );                  
+      strcpy ( bishti_str, "bishti N." );
     else if ( tt == 18 )
-      strcpy ( bishti_str, "bishti SE." );      
+      strcpy ( bishti_str, "bishti SE." );
     else if ( tt == 22 )
-      strcpy ( bishti_str, "bishti SW." );      
+      strcpy ( bishti_str, "bishti SW." );
     else if ( tt == 25 )
-      strcpy ( bishti_str, "bishti NW." );                  
+      strcpy ( bishti_str, "bishti NW." );
     else if ( tt == 29 )
-      strcpy ( bishti_str, "bishti NE." );          
+      strcpy ( bishti_str, "bishti NE." );
   } // END - get_bishti_str ()
-     
+
 void chk_namgo ( int tt ) // n
-  { 
+  {
     namgo_str[0] = 0;
     if ( tt == 1 || tt == 11 || tt == 21 )
       strcpy ( namgo_str, "mgron" );
     else if ( tt == 2 || tt == 12 || tt == 22 )
-      strcpy ( namgo_str, "tshong" );      
+      strcpy ( namgo_str, "tshong" );
     else if ( tt == 3 || tt == 13 || tt == 23 )
-      strcpy ( namgo_str, "bu" );      
+      strcpy ( namgo_str, "bu" );
     else if ( tt == 4 || tt == 14 || tt == 24 )
-      strcpy ( namgo_str, "dmag" );      
+      strcpy ( namgo_str, "dmag" );
     else if ( tt == 5 || tt == 15 || tt == 25 )
-      strcpy ( namgo_str, "gnyen" );      
+      strcpy ( namgo_str, "gnyen" );
     else if ( tt == 6 || tt == 16 || tt == 26 )
-      strcpy ( namgo_str, "mkhar" );      
+      strcpy ( namgo_str, "mkhar" );
     else if ( tt == 7 || tt == 17 || tt == 27 )
-      strcpy ( namgo_str, "bag" );      
+      strcpy ( namgo_str, "bag" );
     else if ( tt == 8 || tt == 18 || tt == 28 )
-      strcpy ( namgo_str, "dur" );      
+      strcpy ( namgo_str, "dur" );
     else if ( tt == 9 || tt == 19 || tt == 29 )
-      strcpy ( namgo_str, "shid" );      
+      strcpy ( namgo_str, "shid" );
     else if ( tt == 10 || tt == 20 || tt == 30 )
-      strcpy ( namgo_str, "spyi" );                                                      
+      strcpy ( namgo_str, "spyi" );
   } // END - chk_namgo ()
-  
+
