@@ -115,7 +115,7 @@ int full_print;
 int cal_print;
 int first_run;
 
-int     zladag[], tt, tm, ty, nyidor, tmth;
+int     zladag[2], tt, tm, ty, nyidor, tmth;
 int     zlasho1, zlasho2;
 int     ltt, ltm, lty;
 int     nyidru[], nyilon[], nyibar[], gzadru[], tsedru[], tsebar[];
