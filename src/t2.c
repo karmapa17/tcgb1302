@@ -23,6 +23,15 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE S
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ************************************************************************************/
 
+#include <stdio.h>
+#include <ctype.h>
+#include <math.h>
+#include <conio.h>
+#include "tc.h"
+#include "tc.ext"
+#include "bcd.h"
+#include "bcd.ext"
+
 // Local to this file only:
 
 int  spz_c, spz_b, spz_f, spz_j;
@@ -75,6 +84,76 @@ void set_grub ( void )
   } // END - set_grub ()
 
 // Routine to set epoch parameters
+
+void set_epoch ( void )
+  {
+    char chr;
+    int  i;
+
+    epch = 1; // Set for default epoch, 1852
+    if ( first_run )
+      goto firstjump;
+
+    printf ( "\n\nSelect from the following:\n\n" );
+    printf ( "%s\n", e_str[0] );    
+    printf ( "%s\n", e_str[1] );        
+
+    do
+      chr = getch ();
+    while ( chr < '1' || chr > '2' );
+    if ( chr >= '1' && chr <= '9' )
+      epch = chr - '0';    
+   
+firstjump: 
+
+    set_grub ();
+
+    if ( epch == 1 ) // Kongtrul epoch
+      {    
+        for ( i = 0; i < 6; ++i )
+          gzada[i] = gda1[i];
+        for ( i = 0; i < 6; ++i )
+          nyida[i] = nda1[i];
+        epch_yr = 1852;
+        eyr_a = 14;   // Intercalation index
+        ril_a = 0; // OK
+        ril_b = 72; // OK
+        spz_b = 15;   // 64 fraction - OK
+        spz_c = 704;   // 707 fraction - OK
+        spz_f = 2;    // OK
+        spz_j = 2397598;  // OK
+        rahupart = 180; // 230 fraction for Rahu cycle // OK
+        meradd = 3003; // OK
+        venadd = 686; // OK
+        maradd = 262; // OK
+        jupadd = 2583; // OK
+        satadd = 437; // OK
+        dragkadd = 83343;    
+      }
+    else if ( epch == 2 ) // Tantra epoch, 806
+      {    
+        for ( i = 0; i < 6; ++i )
+          gzada[i] = gda2[i];
+        for ( i = 0; i < 6; ++i )
+          nyida[i] = nda2[i];
+        epch_yr = 806;
+        eyr_a = 0;   // Intercalation index
+        ril_a = 5; // OK
+        ril_b = 112; // OK
+        spz_b = 0;   // 64 fraction - OK
+        spz_c = 0;   // 707 fraction - OK
+        spz_f = 2;    // OK
+        spz_j = 2015531;  // OK
+        rahupart = 122; // 230 fraction for Rahu cycle // OK
+        meradd = 1674; // OK
+        venadd = 2163; // OK
+        maradd = 167; // OK
+        jupadd = 1732; // OK
+        satadd = 5946; // OK
+        dragkadd = 179201;
+      }    
+    set_epoch_b ();        
+  } // END - set_epoch ()
 
 // ROUTINE TO CALCULATE POSITIONS OF RAHU
 
@@ -200,6 +279,7 @@ void spi_zagf ( void ) // KTC 46
     if ( b - c > 2 )
       {
         printf ( "\n2 - ERROR IN GENERAL DAY ROUTINE: %d\n", b - c );
+        getch ();
       }
     juldat = spizag + spz_j;
     jul2date ( juldat );
@@ -269,6 +349,7 @@ void jul2date ( int jd )
   if ( doweek > 7 )
     {
       printf ( "ERROR IN DAY OF WEEK ROUTINE:\n" );
+      getch ();
     }
 
   if ( jd >= 2299161 )  // Gregorian calendar:

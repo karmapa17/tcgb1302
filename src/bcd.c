@@ -1,14 +1,49 @@
 // bcd.c - binary coded decimal roputines
 // This routine could be retired and replaced with "long long" types.
+
+/*********************************************************************************
+License for TCG - Tibetan Calendar software for "grub rtsis"
+
+Copyright (c) 2009-2011 Edward Henning
+
+Permission is hereby granted, free of charge, to any person  obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in the
+Software without restriction, including without limitation the rights to use, 
+copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+Software, and to permit persons to whom the Software is furnished to do so, subject 
+to the following conditions: 
+
+The above copyright notice and this permission notice shall be included in all copies
+or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
+OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+************************************************************************************/
+
 #include <stdio.h>
 #include <ctype.h>
 #include <math.h>
+#include <conio.h>
 #include "bcd.h"
 
 signed char bcda[BCDMAX];
 signed char bcdb[BCDMAX];
 signed char bcdc[BCDMAX];
 signed char bcdd[BCDMAX];
+
+// These are for intermediate calculations only:
+signed char bcdx0[BCDMAX];
+signed char bcdx1[BCDMAX];
+signed char bcdx2[BCDMAX];
+signed char bcdx3[BCDMAX];
+signed char bcdx4[BCDMAX];
+signed char bcdx5[BCDMAX];
+signed char bcdx6[BCDMAX];
+signed char bcary[BCDMAX];
 
 int bcd_top = BCDMAX; // Highest place used
 
@@ -17,12 +52,12 @@ void chk_bcd ( void );
 // Routine to print to screen maximum number of significant figures used
 // in a BCD integer. Highest value encountered so far is 12
 void chk_bcd ( void )
-{
+  {
     printf ( "Highest figures used: %d\n", BCDMAX - bcd_top );
-}
+  }
 
 void l2bcd ( signed char * b, int n )
-{
+  {
     int i;
     int x;
     x = n;
@@ -48,12 +83,13 @@ void l2bcd ( signed char * b, int n )
         if ( i < 1 )
           {
             printf ( "OVERFLOW IN L2BCD\n" );
+            getch ();
           }
       } while ( x );
-}
+  } // END - l2bcd ()
 
 int bcd2l ( signed char * b )
-{
+  {
     int i;
     int x;
     x = 0L;
@@ -64,10 +100,10 @@ int bcd2l ( signed char * b )
     if ( *b < 0 )
       x = -x;
     return ( x );
-}
+  } // END - int bcd2l ()
 
 void addbcd ( signed char * a1, signed char * b1, signed char * b2 )
-{
+  {
     int i;
     int x;
     signed char bx1[BCDMAX];
@@ -130,11 +166,12 @@ void addbcd ( signed char * a1, signed char * b1, signed char * b2 )
         *a1 = 1;
       }
     return;
-}
+  } // END - addbcd ()
 
 // Compare absolute values
+
 int compabsbcd ( signed char * x1, signed char * x2 ) // +1 if x1 > x2
-{                                                   // -1 if x1 < x2
+  {                                                   // -1 if x1 < x2
     int x;                                            // 0  if x1 = x2
     int ind1, ind2;
     ind1 = 1;
@@ -152,11 +189,11 @@ int compabsbcd ( signed char * x1, signed char * x2 ) // +1 if x1 > x2
         ++ind2;
       } while ( ind2 < BCDMAX );
     return (x);
-}
+  } // END - compabsbcd ()
 
 void subbcd ( signed char * a1, signed char * b1, signed char * b2 )
      // a1 = b1 - b2
-{
+  {
     int i;
     int x, c;
     signed char bx1[BCDMAX];
@@ -233,10 +270,10 @@ void subbcd ( signed char * a1, signed char * b1, signed char * b2 )
               *( a1 + i ) = '\0';
           }
       }
-}
+  } // END - subbcd ()
 
 void mulbcdl ( signed char * a1, signed char * b1, int n ) // a1 = b1 * n
-{
+  {
     int i, r, c, j, sgn;
     int x;
 
@@ -292,12 +329,12 @@ void mulbcdl ( signed char * a1, signed char * b1, int n ) // a1 = b1 * n
     while ( *( a1 + i ) == '\0' && i < BCDMAX );
 
     if ( i < bcd_top )
-      bcd_top = i;
+      bcd_top = i;   
 
-}
+  } // END - mulbcdl ()
 
 void divbcdl ( signed char * a1, signed char * b1, int n ) // a1 = b1 / n
-{
+  {
     int  i, j, sgn, numdigs, strtdig;
     int x, y, res, rem;
 
@@ -349,6 +386,7 @@ void divbcdl ( signed char * a1, signed char * b1, int n ) // a1 = b1 / n
     if ( strtdig > BCDMAX - 1 )
       {
         printf ( "STRTDIG OVERFLOW\n");
+        getch ();
       }
 
     do
@@ -384,14 +422,14 @@ void divbcdl ( signed char * a1, signed char * b1, int n ) // a1 = b1 / n
         ++strtdig;
       } while ( strtdig < BCDMAX );
     *a1 = sgn; // THIS GETS THE SIGN RIGHT
-}
+  } // END - divbcdl ()
 
 void modbcdl ( signed char * a1, signed char * b1, int x )
-{
+  {
     signed char dx1[BCDMAX];
     signed char dx2[BCDMAX];
 
     divbcdl ( dx1, b1, x );
     mulbcdl ( dx2, dx1, x );
     subbcd ( a1, b1, dx2 );
-}
+  } // END - modbcdl ()

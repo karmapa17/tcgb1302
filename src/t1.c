@@ -22,6 +22,13 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE S
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ************************************************************************************/
 
+#include <stdio.h>
+#include <ctype.h>
+#include <conio.h>
+#include <string.h>
+#include "tc.h"
+#include "tc.def"
+
 FILE *repfil;
 
 void chk_bcd ( void );
@@ -263,6 +270,8 @@ Daybreak: %d;%d,%d,%d,%d,%d.",
           {
             printf ( "Serious problem with GZA! - bar: %d, dag: %d\n",
                       tsebar[0], gzadag[0] );
+            getch ();
+            getch ();
           }
 
 // Julian day at 5.00 LMST:
@@ -289,6 +298,7 @@ Daybreak: %d;%d,%d,%d,%d,%d.",
 
         printf ( "\nNew date, Tshespa/lunar day, Month, Year, Report, Previous lunar day, Exit\n\n" );
 
+        chr = getch ();
         printf ("\n");
 
         if ( chr == 'N' || chr == 'n' )
@@ -358,3 +368,195 @@ Daybreak: %d;%d,%d,%d,%d,%d.",
           }
       }
   } // END - cal_cyc ()
+
+void main (argc, argv)
+    int argc;
+    char *argv[];
+  {
+    int    finish, xit;
+    char   chr;
+       
+    if ( argc > 1 )
+      {
+        if ( strcmp ( "FULL", argv[1] ) == 0 || strcmp ( "full", argv[1] ) == 0 )
+          full_print = 1;                                   
+      }
+    else       
+      full_print = 0;                       
+       
+    set_epoch ();  // T2.C
+    finish = 0;
+
+    while ( finish == 0 )
+      {
+        cls ();
+        printf ( " TSURPHU CALENDAR SOFTWARE\n");
+        printf ( "       Version 1.20\n");
+        printf ( " (Includes byed-rtsis Sun)\n\n");
+        printf ( "Use numeric keys to select from the following:\n\n");
+        printf ( "   1. Set epoch.\n");
+        printf ( "   2. Print calendar.\n");
+        printf ( "   3. Calendar cycle.\n");
+        printf ( "   4. Run search test.\n");
+        printf ( "   5. Calculate New Years.\n");
+        printf ( "   9. Finish.\n");
+        xit = 0;
+
+        do
+          {
+            chr = getch ();
+            switch ( chr )
+              {
+                case '1':       
+                  first_run = 0;
+                  set_epoch ();
+                  xit = 1;
+                  break;
+                case '2':       // Print Calendar
+                  cal_print = 1; // Flag to indicate calendar printing.
+                  prn_cal ();
+                  cal_print = 0; 
+                  xit = 1;
+                  break;
+                case '3':       
+                  cal_cyc ();  // Main calendar cycle
+                  xit = 1;
+                  break;
+               case '4':             
+                  srch_cyc ();  // This runs the main test and search routine
+                  xit = 1;
+                  break;
+                case '5':      
+                  new_yer ();  // Calculates new years
+                  xit = 1;
+                  break;
+                case '9':      // FINISH
+                  finish = 1;
+                  xit = 1;
+                  break;
+                default:
+                  ;
+                  break;
+              }
+          } while ( xit == 0 );
+      }
+    chk_bcd ();
+//  printf ( "Maximum sa-bdag string length: %d\n", sadag_str_len );
+  } // END - main ()
+
+void new_yer ( void ) // Routine to calculate successive new year days:
+  {                   // Reuses existing code. No contrived subtlety.
+    int more, n, newmth, lhag, chad;
+    int lastjd = 0L;
+    int curjd; // Previous JD calculations.
+    int cycanimx, cycelemx; 
+    int lasty;
+
+    fptgt = fopen ( "years.dat", "w" );
+    if ( fptgt == NULL )
+      {
+        printf ( "Error opening target file!\n" );
+        getch ();
+      }
+
+    cls ();
+    printf ("Enter the starting year: ");
+    scanf ("%d", &ty);
+    printf ("\n");
+    printf ("Enter the finish year: ");
+    scanf ("%d", &lasty );
+    printf ("\n");
+    tm = 1L;
+
+// tt not yet set
+    lhag = 0; // Before version 1.06 these two were not set, causing
+    chad = 0; // the first year sometimes to be derived wrongly.
+    n = 0;
+    more = 1;
+    newmth = 1;
+    do
+      {
+        if ( newmth )
+          {
+            if ( !zeromthfg )   // We need to use the same data, twice.
+              zla_dag (ty, tm); // But only if moving one month at a time!
+            adj_zla ();
+            cur_mth = zladag[0];
+            gza_dru (cur_mth);
+            nyi_dru (cur_mth);
+            rilchaf ( cur_mth ); // MOVED, from gza_dag, NEW, 11/9/94
+          }
+
+        printf ( "Month = %d, Year = %d\n", tm, ty );
+
+        if ( adj_mth != 1 && adj_mth != -1 ) // Also for 1st intercalary,
+                                             // such as Phugpa, 1935, 2000 CE???
+          goto newmonth;
+
+        tt = 1;
+        do
+          {   // START OF DAY LOOP
+            tse_dru (tt);
+            nyi_lon (tt);
+            add_gen (tsebar, gzadru, tsedru, 7L, gza_f);
+            add_gen (nyibar, nyidru, nyilon, 27L, sun_f );
+            nyi_dag (nyibar); // Must be done before gza_dag
+            gza_dag (tsebar);
+            spi_zagf ();
+            curjd = juldat;
+            tse_dru (tt-1L);
+            nyi_lon (tt-1L);
+            add_gen (tsebar, gzadru, tsedru, 7L, gza_f);
+            add_gen (nyibar, nyidru, nyilon, 27L, sun_f );
+            nyi_dag (nyibar); // Must be done before gza_dag
+            gza_dag (tsebar);
+            spi_zagf ();
+            lastjd = juldat;
+
+// Recalculate for current tithi:
+            tse_dru (tt);
+            nyi_lon (tt);
+            add_gen (tsebar, gzadru, tsedru, 7L, gza_f);
+            add_gen (nyibar, nyidru, nyilon, 27L, sun_f );
+            nyi_dag (nyibar); // Must be done before gza_dag
+            gza_dag (tsebar);
+            spi_zagf ();
+            if ( curjd == lastjd + 2L )
+              lhag = 1;
+            if ( curjd == lastjd )
+              chad = 1;
+            if ( tt == 1L && chad ) // Take next date
+              {
+                // Rough fix for Phugpa 1977 - 1st lunar date omitted -> 19 Feb is correct day
+                juldat = juldat + 1L;
+                jul2date ( juldat ); // This is normally done by spi_zagf
+              }
+
+            cycanimx = ( ty - 7L ) % 12L;
+            cycelemx = ( ty - 5L ) % 10L;
+
+            sprintf ( outbuf, "%s-%s Year: %s, %d %s %d.",
+                cycelem[cycelemx], cycanim[cycanimx], dayoweek[doweek],
+                wd, wmonths[ (wm-1L) ], wy );
+            if ( adj_mth == -1L ) // Bug fix, for 1st month intercalaries
+              tm = 12L;
+            fprintf ( fptgt, "%s\n", outbuf );
+            ++tt;
+            newmth = 0;
+            lastjd = juldat;
+            lhag = 0;
+            chad = 0;
+          } while ( tt < 2 );    // END OF DAY LOOP
+        newmonth:
+        newmth = 1;
+        if ( !zeromthfg )
+          ++tm;
+        if ( tm > 12L )
+          {
+            ++ty;
+            tm = 1L;
+          }
+      } while ( ty < lasty );  // END OF MONTH LOOP
+    fclose ( fptgt );
+  } // END - new_yer ()
+  

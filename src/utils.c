@@ -23,9 +23,12 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE S
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ************************************************************************************/
 
+#include <conio.h>
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
+#include <dos.h>
+#include <bios.h>
 #include <math.h>
 #include "tc.h"
 #include "tc.ext"

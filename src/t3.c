@@ -22,6 +22,15 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE S
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ************************************************************************************/
 
+#include <stdio.h>
+#include <ctype.h>
+#include <math.h>
+#include <conio.h>
+#include "tc.h"
+#include "tc.ext"
+#include "bcd.h"
+#include "bcd.ext"
+
 int rkang_frac;
 
 static int merbye1[14] =
