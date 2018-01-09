@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
-#include <conio.h>
 #include "tc.h"
 #include "tc.ext"
 #include "bcd.h"
@@ -69,7 +68,6 @@ donextyear:
     if ( fptgt1 == NULL )
       {
         printf ( "Error opening target file!\n" );
-        getch ();
       }
 
 // tt not yet set
